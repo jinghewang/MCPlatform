@@ -1,0 +1,574 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="http://tempuri.org/" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="Services" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsp:Policy wsu:Id="WSDualHttpBinding_IServices_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <wsrm:RMAssertion xmlns:wsrm="http://schemas.xmlsoap.org/ws/2005/02/rm/policy">
+          <wsrm:InactivityTimeout Milliseconds="600000" />
+          <wsrm:AcknowledgementInterval Milliseconds="200" />
+        </wsrm:RMAssertion>
+        <cdp:CompositeDuplex xmlns:cdp="http://schemas.microsoft.com/net/2006/06/duplex" />
+        <ow:OneWay xmlns:ow="http://schemas.microsoft.com/ws/2005/05/routing/policy" />
+        <wsaw:UsingAddressing />
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsp:Policy wsu:Id="WSDualHttpBinding_IServices_StartTask_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <wsat:ATAssertion xmlns:wsat="http://schemas.xmlsoap.org/ws/2004/10/wsat" />
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsp:Policy wsu:Id="WSDualHttpBinding_IServices_StopTask_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <wsat:ATAssertion wsp:Optional="true" wsp1:Optional="true" xmlns:wsat="http://schemas.xmlsoap.org/ws/2004/10/wsat" xmlns:wsp1="http://schemas.xmlsoap.org/ws/2002/12/policy" />
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsp:Policy wsu:Id="WSDualHttpBinding_IServices_DataFreshMessage_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <wsat:ATAssertion wsp:Optional="true" wsp1:Optional="true" xmlns:wsat="http://schemas.xmlsoap.org/ws/2004/10/wsat" xmlns:wsp1="http://schemas.xmlsoap.org/ws/2002/12/policy" />
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsp:Policy wsu:Id="WSDualHttpBinding_IServices_TransactionTest1_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <wsat:ATAssertion xmlns:wsat="http://schemas.xmlsoap.org/ws/2004/10/wsat" />
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsp:Policy wsu:Id="WSDualHttpBinding_IServices_TransactionTest2_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <wsat:ATAssertion wsp:Optional="true" wsp1:Optional="true" xmlns:wsat="http://schemas.xmlsoap.org/ws/2004/10/wsat" xmlns:wsp1="http://schemas.xmlsoap.org/ws/2002/12/policy" />
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsp:Policy wsu:Id="WSDualHttpBinding_IServices_TransactionTest3_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <wsat:ATAssertion wsp:Optional="true" wsp1:Optional="true" xmlns:wsat="http://schemas.xmlsoap.org/ws/2004/10/wsat" xmlns:wsp1="http://schemas.xmlsoap.org/ws/2002/12/policy" />
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsp:Policy wsu:Id="WSDualHttpBinding_IServices_SendMessage_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <wsat:ATAssertion wsp:Optional="true" wsp1:Optional="true" xmlns:wsat="http://schemas.xmlsoap.org/ws/2004/10/wsat" xmlns:wsp1="http://schemas.xmlsoap.org/ws/2002/12/policy" />
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsp:Policy wsu:Id="WSDualHttpBinding_IServices_SendAgentControl_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <wsat:ATAssertion wsp:Optional="true" wsp1:Optional="true" xmlns:wsat="http://schemas.xmlsoap.org/ws/2004/10/wsat" xmlns:wsp1="http://schemas.xmlsoap.org/ws/2002/12/policy" />
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsp:Policy wsu:Id="WSDualHttpBinding_IServices_SendAgentCollect_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <wsat:ATAssertion wsp:Optional="true" wsp1:Optional="true" xmlns:wsat="http://schemas.xmlsoap.org/ws/2004/10/wsat" xmlns:wsp1="http://schemas.xmlsoap.org/ws/2002/12/policy" />
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsp:Policy wsu:Id="WSDualHttpBinding_IServices_SendChangeAgentMode_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <wsat:ATAssertion wsp:Optional="true" wsp1:Optional="true" xmlns:wsat="http://schemas.xmlsoap.org/ws/2004/10/wsat" xmlns:wsp1="http://schemas.xmlsoap.org/ws/2002/12/policy" />
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsp:Policy wsu:Id="WSDualHttpBinding_IServices_SendStartTask_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <wsat:ATAssertion wsp:Optional="true" wsp1:Optional="true" xmlns:wsat="http://schemas.xmlsoap.org/ws/2004/10/wsat" xmlns:wsp1="http://schemas.xmlsoap.org/ws/2002/12/policy" />
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsp:Policy wsu:Id="WSDualHttpBinding_IServices_SendStopTask_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <wsat:ATAssertion wsp:Optional="true" wsp1:Optional="true" xmlns:wsat="http://schemas.xmlsoap.org/ws/2004/10/wsat" xmlns:wsp1="http://schemas.xmlsoap.org/ws/2002/12/policy" />
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsp:Policy wsu:Id="WSDualHttpBinding_IServices_SendDataFreshMessage_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <wsat:ATAssertion wsp:Optional="true" wsp1:Optional="true" xmlns:wsat="http://schemas.xmlsoap.org/ws/2004/10/wsat" xmlns:wsp1="http://schemas.xmlsoap.org/ws/2002/12/policy" />
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsp:Policy wsu:Id="WSDualHttpBinding_IServices_SendTransactionTest1_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <wsat:ATAssertion wsp:Optional="true" wsp1:Optional="true" xmlns:wsat="http://schemas.xmlsoap.org/ws/2004/10/wsat" xmlns:wsp1="http://schemas.xmlsoap.org/ws/2002/12/policy" />
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsp:Policy wsu:Id="WSDualHttpBinding_IServices_SendTransactionTest2_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <wsat:ATAssertion wsp:Optional="true" wsp1:Optional="true" xmlns:wsat="http://schemas.xmlsoap.org/ws/2004/10/wsat" xmlns:wsp1="http://schemas.xmlsoap.org/ws/2002/12/policy" />
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://tempuri.org/Imports">
+      <xsd:import namespace="http://tempuri.org/" />
+      <xsd:import namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="IServices_RegisterAgent_InputMessage">
+    <wsdl:part name="parameters" element="tns:RegisterAgent" />
+  </wsdl:message>
+  <wsdl:message name="IServices_RegisterAgent_OutputMessage">
+    <wsdl:part name="parameters" element="tns:RegisterAgentResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServices_RegisterAgentByAgentNo_InputMessage">
+    <wsdl:part name="parameters" element="tns:RegisterAgentByAgentNo" />
+  </wsdl:message>
+  <wsdl:message name="IServices_RegisterAgentByAgentNo_OutputMessage">
+    <wsdl:part name="parameters" element="tns:RegisterAgentByAgentNoResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServices_StartTask_InputMessage">
+    <wsdl:part name="parameters" element="tns:StartTask" />
+  </wsdl:message>
+  <wsdl:message name="IServices_StartTask_OutputMessage">
+    <wsdl:part name="parameters" element="tns:StartTaskResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServices_StopTask_InputMessage">
+    <wsdl:part name="parameters" element="tns:StopTask" />
+  </wsdl:message>
+  <wsdl:message name="IServices_StopTask_OutputMessage">
+    <wsdl:part name="parameters" element="tns:StopTaskResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServices_DataFreshMessage_InputMessage">
+    <wsdl:part name="parameters" element="tns:DataFreshMessage" />
+  </wsdl:message>
+  <wsdl:message name="IServices_DataFreshMessage_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DataFreshMessageResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServices_Register_InputMessage">
+    <wsdl:part name="parameters" element="tns:Register" />
+  </wsdl:message>
+  <wsdl:message name="IServices_Register_OutputMessage">
+    <wsdl:part name="parameters" element="tns:RegisterResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServices_RegisterByClientNo_InputMessage">
+    <wsdl:part name="parameters" element="tns:RegisterByClientNo" />
+  </wsdl:message>
+  <wsdl:message name="IServices_RegisterByClientNo_OutputMessage">
+    <wsdl:part name="parameters" element="tns:RegisterByClientNoResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServices_BroadToAgent_InputMessage">
+    <wsdl:part name="parameters" element="tns:BroadToAgent" />
+  </wsdl:message>
+  <wsdl:message name="IServices_BroadToAgent_OutputMessage">
+    <wsdl:part name="parameters" element="tns:BroadToAgentResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServices_CheckAgent_InputMessage">
+    <wsdl:part name="parameters" element="tns:CheckAgent" />
+  </wsdl:message>
+  <wsdl:message name="IServices_CheckAgent_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CheckAgentResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServices_ChangeAgentMode_InputMessage">
+    <wsdl:part name="parameters" element="tns:ChangeAgentMode" />
+  </wsdl:message>
+  <wsdl:message name="IServices_ChangeAgentMode_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ChangeAgentModeResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServices_TransactionTest1_InputMessage">
+    <wsdl:part name="parameters" element="tns:TransactionTest1" />
+  </wsdl:message>
+  <wsdl:message name="IServices_TransactionTest1_OutputMessage">
+    <wsdl:part name="parameters" element="tns:TransactionTest1Response" />
+  </wsdl:message>
+  <wsdl:message name="IServices_TransactionTest2_InputMessage">
+    <wsdl:part name="parameters" element="tns:TransactionTest2" />
+  </wsdl:message>
+  <wsdl:message name="IServices_TransactionTest2_OutputMessage">
+    <wsdl:part name="parameters" element="tns:TransactionTest2Response" />
+  </wsdl:message>
+  <wsdl:message name="IServices_TransactionTest3_InputMessage">
+    <wsdl:part name="parameters" element="tns:TransactionTest3" />
+  </wsdl:message>
+  <wsdl:message name="IServices_TransactionTest3_OutputMessage">
+    <wsdl:part name="parameters" element="tns:TransactionTest3Response" />
+  </wsdl:message>
+  <wsdl:message name="IServices_SendMessage_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:SendMessage" />
+  </wsdl:message>
+  <wsdl:message name="IServices_SendMessage_InputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:SendMessageResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServices_SendAgentControl_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:SendAgentControl" />
+  </wsdl:message>
+  <wsdl:message name="IServices_SendAgentControl_InputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:SendAgentControlResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServices_SendAgentCollect_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:SendAgentCollect" />
+  </wsdl:message>
+  <wsdl:message name="IServices_SendAgentCollect_InputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:SendAgentCollectResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServices_SendChangeAgentMode_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:SendChangeAgentMode" />
+  </wsdl:message>
+  <wsdl:message name="IServices_SendChangeAgentMode_InputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:SendChangeAgentModeResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServices_SendStartTask_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:SendStartTask" />
+  </wsdl:message>
+  <wsdl:message name="IServices_SendStartTask_InputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:SendStartTaskResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServices_SendStopTask_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:SendStopTask" />
+  </wsdl:message>
+  <wsdl:message name="IServices_SendStopTask_InputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:SendStopTaskResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServices_SendDataFreshMessage_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:SendDataFreshMessage" />
+  </wsdl:message>
+  <wsdl:message name="IServices_SendDataFreshMessage_InputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:SendDataFreshMessageResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServices_SendTransactionTest1_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:SendTransactionTest1" />
+  </wsdl:message>
+  <wsdl:message name="IServices_SendTransactionTest1_InputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:SendTransactionTest1Response" />
+  </wsdl:message>
+  <wsdl:message name="IServices_SendTransactionTest2_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:SendTransactionTest2" />
+  </wsdl:message>
+  <wsdl:message name="IServices_SendTransactionTest2_InputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:SendTransactionTest2Response" />
+  </wsdl:message>
+  <wsdl:portType msc:usingSession="true" name="IServices">
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="RegisterAgent">
+      <wsdl:input wsaw:Action="http://tempuri.org/IAgentServices/RegisterAgent" message="tns:IServices_RegisterAgent_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IAgentServices/RegisterAgentResponse" message="tns:IServices_RegisterAgent_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="RegisterAgentByAgentNo">
+      <wsdl:input wsaw:Action="http://tempuri.org/IAgentServices/RegisterAgentByAgentNo" message="tns:IServices_RegisterAgentByAgentNo_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IAgentServices/RegisterAgentByAgentNoResponse" message="tns:IServices_RegisterAgentByAgentNo_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="StartTask">
+      <wsdl:input wsaw:Action="http://tempuri.org/IAgentServices/StartTask" message="tns:IServices_StartTask_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IAgentServices/StartTaskResponse" message="tns:IServices_StartTask_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="StopTask">
+      <wsdl:input wsaw:Action="http://tempuri.org/IAgentServices/StopTask" message="tns:IServices_StopTask_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IAgentServices/StopTaskResponse" message="tns:IServices_StopTask_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="DataFreshMessage">
+      <wsdl:input wsaw:Action="http://tempuri.org/IAgentServices/DataFreshMessage" message="tns:IServices_DataFreshMessage_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IAgentServices/DataFreshMessageResponse" message="tns:IServices_DataFreshMessage_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="Register">
+      <wsdl:input wsaw:Action="http://tempuri.org/IClientServices/Register" message="tns:IServices_Register_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IClientServices/RegisterResponse" message="tns:IServices_Register_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="RegisterByClientNo">
+      <wsdl:input wsaw:Action="http://tempuri.org/IClientServices/RegisterByClientNo" message="tns:IServices_RegisterByClientNo_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IClientServices/RegisterByClientNoResponse" message="tns:IServices_RegisterByClientNo_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="BroadToAgent">
+      <wsdl:input wsaw:Action="http://tempuri.org/IClientServices/BroadToAgent" message="tns:IServices_BroadToAgent_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IClientServices/BroadToAgentResponse" message="tns:IServices_BroadToAgent_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="CheckAgent">
+      <wsdl:input wsaw:Action="http://tempuri.org/IClientServices/CheckAgent" message="tns:IServices_CheckAgent_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IClientServices/CheckAgentResponse" message="tns:IServices_CheckAgent_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="ChangeAgentMode">
+      <wsdl:input wsaw:Action="http://tempuri.org/IClientServices/ChangeAgentMode" message="tns:IServices_ChangeAgentMode_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IClientServices/ChangeAgentModeResponse" message="tns:IServices_ChangeAgentMode_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="TransactionTest1">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServices/TransactionTest1" message="tns:IServices_TransactionTest1_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServices/TransactionTest1Response" message="tns:IServices_TransactionTest1_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="TransactionTest2">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServices/TransactionTest2" message="tns:IServices_TransactionTest2_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServices/TransactionTest2Response" message="tns:IServices_TransactionTest2_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="TransactionTest3">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServices/TransactionTest3" message="tns:IServices_TransactionTest3_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServices/TransactionTest3Response" message="tns:IServices_TransactionTest3_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="SendMessage">
+      <wsdl:output wsaw:Action="http://tempuri.org/IServices/SendMessage" message="tns:IServices_SendMessage_OutputCallbackMessage" />
+      <wsdl:input wsaw:Action="http://tempuri.org/IServices/SendMessageResponse" message="tns:IServices_SendMessage_InputCallbackMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="SendAgentControl">
+      <wsdl:output wsaw:Action="http://tempuri.org/IServices/SendAgentControl" message="tns:IServices_SendAgentControl_OutputCallbackMessage" />
+      <wsdl:input wsaw:Action="http://tempuri.org/IServices/SendAgentControlResponse" message="tns:IServices_SendAgentControl_InputCallbackMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="SendAgentCollect">
+      <wsdl:output wsaw:Action="http://tempuri.org/IServices/SendAgentCollect" message="tns:IServices_SendAgentCollect_OutputCallbackMessage" />
+      <wsdl:input wsaw:Action="http://tempuri.org/IServices/SendAgentCollectResponse" message="tns:IServices_SendAgentCollect_InputCallbackMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="SendChangeAgentMode">
+      <wsdl:output wsaw:Action="http://tempuri.org/IServices/SendChangeAgentMode" message="tns:IServices_SendChangeAgentMode_OutputCallbackMessage" />
+      <wsdl:input wsaw:Action="http://tempuri.org/IServices/SendChangeAgentModeResponse" message="tns:IServices_SendChangeAgentMode_InputCallbackMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="SendStartTask">
+      <wsdl:output wsaw:Action="http://tempuri.org/IServices/SendStartTask" message="tns:IServices_SendStartTask_OutputCallbackMessage" />
+      <wsdl:input wsaw:Action="http://tempuri.org/IServices/SendStartTaskResponse" message="tns:IServices_SendStartTask_InputCallbackMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="SendStopTask">
+      <wsdl:output wsaw:Action="http://tempuri.org/IServices/SendStopTask" message="tns:IServices_SendStopTask_OutputCallbackMessage" />
+      <wsdl:input wsaw:Action="http://tempuri.org/IServices/SendStopTaskResponse" message="tns:IServices_SendStopTask_InputCallbackMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="SendDataFreshMessage">
+      <wsdl:output wsaw:Action="http://tempuri.org/IServices/SendDataFreshMessage" message="tns:IServices_SendDataFreshMessage_OutputCallbackMessage" />
+      <wsdl:input wsaw:Action="http://tempuri.org/IServices/SendDataFreshMessageResponse" message="tns:IServices_SendDataFreshMessage_InputCallbackMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="SendTransactionTest1">
+      <wsdl:output wsaw:Action="http://tempuri.org/IServices/SendTransactionTest1" message="tns:IServices_SendTransactionTest1_OutputCallbackMessage" />
+      <wsdl:input wsaw:Action="http://tempuri.org/IServices/SendTransactionTest1Response" message="tns:IServices_SendTransactionTest1_InputCallbackMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="SendTransactionTest2">
+      <wsdl:output wsaw:Action="http://tempuri.org/IServices/SendTransactionTest2" message="tns:IServices_SendTransactionTest2_OutputCallbackMessage" />
+      <wsdl:input wsaw:Action="http://tempuri.org/IServices/SendTransactionTest2Response" message="tns:IServices_SendTransactionTest2_InputCallbackMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="WSDualHttpBinding_IServices" type="tns:IServices">
+    <wsp:PolicyReference URI="#WSDualHttpBinding_IServices_policy" />
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="RegisterAgent">
+      <soap12:operation soapAction="http://tempuri.org/IAgentServices/RegisterAgent" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RegisterAgentByAgentNo">
+      <soap12:operation soapAction="http://tempuri.org/IAgentServices/RegisterAgentByAgentNo" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="StartTask">
+      <wsp:PolicyReference URI="#WSDualHttpBinding_IServices_StartTask_policy" />
+      <soap12:operation soapAction="http://tempuri.org/IAgentServices/StartTask" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="StopTask">
+      <wsp:PolicyReference URI="#WSDualHttpBinding_IServices_StopTask_policy" />
+      <soap12:operation soapAction="http://tempuri.org/IAgentServices/StopTask" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DataFreshMessage">
+      <wsp:PolicyReference URI="#WSDualHttpBinding_IServices_DataFreshMessage_policy" />
+      <soap12:operation soapAction="http://tempuri.org/IAgentServices/DataFreshMessage" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Register">
+      <soap12:operation soapAction="http://tempuri.org/IClientServices/Register" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RegisterByClientNo">
+      <soap12:operation soapAction="http://tempuri.org/IClientServices/RegisterByClientNo" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="BroadToAgent">
+      <soap12:operation soapAction="http://tempuri.org/IClientServices/BroadToAgent" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CheckAgent">
+      <soap12:operation soapAction="http://tempuri.org/IClientServices/CheckAgent" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ChangeAgentMode">
+      <soap12:operation soapAction="http://tempuri.org/IClientServices/ChangeAgentMode" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="TransactionTest1">
+      <wsp:PolicyReference URI="#WSDualHttpBinding_IServices_TransactionTest1_policy" />
+      <soap12:operation soapAction="http://tempuri.org/IServices/TransactionTest1" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="TransactionTest2">
+      <wsp:PolicyReference URI="#WSDualHttpBinding_IServices_TransactionTest2_policy" />
+      <soap12:operation soapAction="http://tempuri.org/IServices/TransactionTest2" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="TransactionTest3">
+      <wsp:PolicyReference URI="#WSDualHttpBinding_IServices_TransactionTest3_policy" />
+      <soap12:operation soapAction="http://tempuri.org/IServices/TransactionTest3" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SendMessage">
+      <wsp:PolicyReference URI="#WSDualHttpBinding_IServices_SendMessage_policy" />
+      <soap12:operation soapAction="http://tempuri.org/IServices/SendMessage" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SendAgentControl">
+      <wsp:PolicyReference URI="#WSDualHttpBinding_IServices_SendAgentControl_policy" />
+      <soap12:operation soapAction="http://tempuri.org/IServices/SendAgentControl" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SendAgentCollect">
+      <wsp:PolicyReference URI="#WSDualHttpBinding_IServices_SendAgentCollect_policy" />
+      <soap12:operation soapAction="http://tempuri.org/IServices/SendAgentCollect" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SendChangeAgentMode">
+      <wsp:PolicyReference URI="#WSDualHttpBinding_IServices_SendChangeAgentMode_policy" />
+      <soap12:operation soapAction="http://tempuri.org/IServices/SendChangeAgentMode" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SendStartTask">
+      <wsp:PolicyReference URI="#WSDualHttpBinding_IServices_SendStartTask_policy" />
+      <soap12:operation soapAction="http://tempuri.org/IServices/SendStartTask" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SendStopTask">
+      <wsp:PolicyReference URI="#WSDualHttpBinding_IServices_SendStopTask_policy" />
+      <soap12:operation soapAction="http://tempuri.org/IServices/SendStopTask" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SendDataFreshMessage">
+      <wsp:PolicyReference URI="#WSDualHttpBinding_IServices_SendDataFreshMessage_policy" />
+      <soap12:operation soapAction="http://tempuri.org/IServices/SendDataFreshMessage" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SendTransactionTest1">
+      <wsp:PolicyReference URI="#WSDualHttpBinding_IServices_SendTransactionTest1_policy" />
+      <soap12:operation soapAction="http://tempuri.org/IServices/SendTransactionTest1" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SendTransactionTest2">
+      <wsp:PolicyReference URI="#WSDualHttpBinding_IServices_SendTransactionTest2_policy" />
+      <soap12:operation soapAction="http://tempuri.org/IServices/SendTransactionTest2" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="Services">
+    <wsdl:port name="WSDualHttpBinding_IServices" binding="tns:WSDualHttpBinding_IServices">
+      <soap12:address location="http://localhost:2000/" />
+      <wsa10:EndpointReference>
+        <wsa10:Address>http://localhost:2000/</wsa10:Address>
+      </wsa10:EndpointReference>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
